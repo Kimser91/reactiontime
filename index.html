@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+  
+  <script>
+
+let counter;
+let randomNum;
+const stopValue = 24;
+let startTime;
+let finishTime;
+let reactionTimes = []
+let interval;
+
+
+
+
+    updateView()
+
+    function updateView() {
+      document.getElementById('app').innerHTML = /*html*/`
+     <div class="container">
+      <span class="gridFix" id="starterCircle"></span>
+    </div>
+      <span class="myList" id="liste"> Reactiontime: ${printReactionTime()}</span>
+     
+
+      `;
+      printCircles()
+    }
+
+    function printCircles(){
+      startTime = Date.now()
+      randomNum = Math.floor(Math.random() * stopValue);
+      // if(randomNum == counter){
+      //   turnOnLight(counter)
+      // }
+  for(counter = 0; counter <= stopValue; counter = counter + 1 ){
+    if(randomNum == counter){
+      document.getElementById('starterCircle').innerHTML += `<div onclick="turnOffLight(this.id)" class="circle on" id="${counter}"></div>`;
+      
+    }
+    else if (randomNum != counter) {
+      document.getElementById('starterCircle').innerHTML += `<div class="circle" id="${counter}"></div>`;
+    }
+     
+    
+      
+  }
+  
+    }
+
+    function printReactionTime() {
+      
+      let result = '';
+
+      for (let i = 0; i < reactionTimes.length; i++) {
+      result += 
+      `<li><span>${reactionTimes[i]}</span>:</li>`; 
+      }
+      return result;
+    }
+
+    function turnOffLight(id) {
+      finishTime = Date.now() - startTime
+      reactionTimes.push(finishTime)
+      clearInterval(interval)
+      interval = setInterval(updateView,1500)
+      updateView()
+    }
+
+
+  </script>
+
+  <style>
+
+.container{
+  width: max-content;
+  height: max-content;
+  background-color: brown;
+}
+   .gridFix {
+      display: grid;
+      grid-template-columns: auto auto auto auto auto;
+   }
+    .circle {
+      
+      box-shadow: -10px 15px 22px 15px black inset;
+      height: 75px;
+      width: 75px;
+      border-radius: 50%;
+      background-color: var(--light-color);
+      padding: 10px;
+      margin: 10px;
+      }
+
+      .on{
+        background-color: yellow;
+      }
+    
+
+    .blackOut {
+      background-color: black;
+    }
+
+    .myList{
+      display: grid;
+      grid-row: auto;
+      width: max-content;
+      padding: 20px;
+      margin: 10px;
+      background-color: aqua;
+      font-size: xx-large;
+      font-weight: bold;
+    }
+    
+    
+  </style>
+</body>
+</html>
