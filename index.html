@@ -28,7 +28,7 @@ let interval;
      <div class="container">
       <span class="gridFix" id="starterCircle"></span>
     </div>
-      <span class="myList" id="liste"> Reactiontime: ${printReactionTime()}ms</span>
+      <span class="myList" id="liste"> Reactiontime: ${printReactionTime()}</span>
      
 
       `;
@@ -62,7 +62,7 @@ let interval;
 
       for (let i = 0; i < reactionTimes.length; i++) {
       result += 
-      `<li><span>${reactionTimes[i]}</span>:</li>`; 
+      `<li><span>${reactionTimes[i]}ms</span>:</li>`; 
       }
       return result;
     }
